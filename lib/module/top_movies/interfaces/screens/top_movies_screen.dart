@@ -34,15 +34,43 @@ class _TopMoviesScreenState extends State<TopMoviesScreen> {
                 itemCount: state.movies.length,
                 itemBuilder: (BuildContext context, int index) {
                   return ListTile(
+                    leading: ClipRRect(
+                      child: Container(
+                        child: Image.network(state.movies[index].image),
+                      ),
+                    ),
                     title: Text(
-                      state.movies[index].title,
+                      state.movies[index].rank +
+                          "." +
+                          state.movies[index].title +
+                          " (" +
+                          state.movies[index].year +
+                          ")",
                       style: _theme.textTheme.bodyText2
                           ?.copyWith(color: Colors.white),
                     ),
-                    subtitle: Text(
-                      state.movies[index].crew,
-                      style: _theme.textTheme.bodyText2
-                          ?.copyWith(color: Colors.white),
+                    subtitle: Column(
+                      children: [
+                        Wrap(
+                          children: [
+                            Text(
+                              state.movies[index].crew,
+                              style: _theme.textTheme.bodyText2
+                                  ?.copyWith(color: Colors.white),
+                            ),
+                          ],
+                        ),
+                        Row(
+                          children: [
+                            Icon(Icons.star, color: Colors.white, size: 10.0),
+                            Text(
+                              state.movies[index].imDbRating,
+                              style: _theme.textTheme.bodyText2
+                                  ?.copyWith(color: Colors.white),
+                            ),
+                          ],
+                        ),
+                      ],
                     ),
                   );
                 },
